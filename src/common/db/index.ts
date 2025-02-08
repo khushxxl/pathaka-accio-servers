@@ -13,7 +13,7 @@ db.heartbeart
     })
     .catch((_: unknown) => {
         logger.error('Error connecting to the DB');
-        process.exit(1);
+        // process.exit(1);
     });
 
 export { db };
