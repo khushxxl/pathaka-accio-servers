@@ -16,7 +16,7 @@
         "plop": "plop && npm run l:f && npm run p:f",
         "type-check": "tsc --noEmit",
         "db:migrate": "npx prisma format && npx prisma generate",
-        "start": "node ./build/fe-api/server.js",
+        "start": "node ./build/fe-api/server.js"
     },
     "author": "Conor Deegan",
     "license": "ISC",
