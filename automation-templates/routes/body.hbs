@@ -1,0 +1,13 @@
+import express from 'express';
+
+import {
+    // Automation: importController
+    {{name}}
+} from '../../../controllers/v1/{{ parent }}.controller';
+
+const {{ parent }}Router = express.Router();
+
+// Automation: addRoute
+{{ parent }}Router.{{ verb }}('{{ resourceEnd }}', MIDDLEWARE, {{name}});
+
+export default {{ parent }}Router;

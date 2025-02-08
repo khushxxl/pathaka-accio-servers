@@ -1,0 +1,14 @@
+import { logger } from '../../../utils/logger';
+import { ErrorHandler } from './../../../utils/error';
+
+const {{ name }} = async (): Promise<string> => {
+    try {
+        const response = 'Hello world from inside the {{ name }} {{ parent }} core service!'
+        logger.debug(response);
+        return response;
+    } catch (error) {
+        throw new ErrorHandler(error.statusCode, error.message);
+    }
+};
+
+export default {{ name }};

@@ -1,0 +1,38 @@
+# pull the Node.js Docker image - alpine is the lightest version
+FROM node:18-slim
+
+# Install ffmpeg and OpenSSL
+RUN apt-get update && \
+    apt-get install -y ffmpeg openssl libssl-dev && \
+    rm -rf /var/lib/apt/lists/*
+
+# create app directory and set working directory
+WORKDIR /usr/src/app
+
+# Install dependencies first (better layer caching)
+COPY package*.json ./
+RUN npm install prisma && npm install
+
+# Create all required directories
+RUN mkdir -p \
+    assets/audio \
+    assets/seed-images \
+    uploads/images
+
+# Copy assets first (they change less frequently)
+COPY assets ./assets/
+
+# Copy source code (changes most frequently)
+COPY . .
+
+# Generate Prisma client and build
+RUN npm run db:migrate && npm run build
+
+# Expose port
+EXPOSE 8080
+
+# Set NODE_ENV
+ENV NODE_ENV=production
+
+# the command that starts the app
+CMD ["npm", "run", "start:fe-api"]

@@ -1,0 +1,20 @@
+import { NextFunction, Request, Response } from 'express';
+
+import { statusCodes } from '../../../config/constants';
+import { ErrorHandler } from '../../../utils/error';
+import { {{name}} as {{name}}CoreService } from './../../../../core/v1/{{parent}}.core';
+
+const {{name}} = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<Response | undefined> => {
+    try {
+        const response = await {{name}}CoreService();
+        return res.status(statusCodes.SUCCESS).json(response);
+    } catch (error) {
+        next(error);
+    }
+};
+
+export default {{name}};
